@@ -6,19 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>线程池 | hulong blog</title>
+  <title>八大排序算法总结之一（冒泡排序，快速排序，直接插入排序，希尔排序） | hulong blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="线程池1. 线程池思想概述我们使用线程的时候就去创建一个线程，这样实现起来非常简便，但是就会有一个问题： 如果并发的线程数量很多，并且每个线程都是执行一个时间很短的任务就结束了，这样频繁创建线程就会大大降低系统的效率，因为频繁创建线程和销毁线程需要时间。 那么有没有一种办法使得线程可以复用，就是执行完一个任务，并不被销毁，而是可以继续执行其他的任务？ 在Java中可以通过线程池来达到这样的效果。今">
+  <meta name="description" content="冒泡排序算法：（从后往前）bubbleSort比较相邻的两个数，若前面的数大于后面的数，则交换两个数； 这样对0到n-1个数据进行遍历，那么最大的数据就会被排到n-1处； 重复步骤，直至再也不能交换。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线程池">
-<meta property="og:url" content="http://yoursite.com/2019/03/01/%E7%BA%BF%E7%A8%8B%E6%B1%A0/index.html">
+<meta property="og:title" content="八大排序算法总结之一（冒泡排序，快速排序，直接插入排序，希尔排序）">
+<meta property="og:url" content="http://yoursite.com/2019/02/19/%E5%85%AB%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93%E4%B9%8B%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%EF%BC%8C%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%EF%BC%8C%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%EF%BC%8C%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F%EF%BC%89/index.html">
 <meta property="og:site_name" content="hulong blog">
-<meta property="og:description" content="线程池1. 线程池思想概述我们使用线程的时候就去创建一个线程，这样实现起来非常简便，但是就会有一个问题： 如果并发的线程数量很多，并且每个线程都是执行一个时间很短的任务就结束了，这样频繁创建线程就会大大降低系统的效率，因为频繁创建线程和销毁线程需要时间。 那么有没有一种办法使得线程可以复用，就是执行完一个任务，并不被销毁，而是可以继续执行其他的任务？ 在Java中可以通过线程池来达到这样的效果。今">
+<meta property="og:description" content="冒泡排序算法：（从后往前）bubbleSort比较相邻的两个数，若前面的数大于后面的数，则交换两个数； 这样对0到n-1个数据进行遍历，那么最大的数据就会被排到n-1处； 重复步骤，直至再也不能交换。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2019-03-01T11:02:49.000Z">
-<meta property="article:modified_time" content="2020-02-22T11:08:42.245Z">
+<meta property="og:image" content="d:%5C%E7%94%B5%E8%84%91%E5%A3%81%E7%BA%B8%5Cmddd%5C%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95.PNG">
+<meta property="article:published_time" content="2019-02-19T01:13:14.000Z">
+<meta property="article:modified_time" content="2020-03-02T03:05:20.220Z">
 <meta property="article:author" content="hulong">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="d:%5C%E7%94%B5%E8%84%91%E5%A3%81%E7%BA%B8%5Cmddd%5C%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95.PNG">
   
     <link rel="alternative" href="/atom.xml" title="hulong blog" type="application/atom+xml">
   
@@ -162,65 +164,56 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-线程池" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-八大排序算法总结之一（冒泡排序，快速排序，直接插入排序，希尔排序）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      线程池
+      八大排序算法总结之一（冒泡排序，快速排序，直接插入排序，希尔排序）
     </h1>
   
 
         
-        <a href="/2019/03/01/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="archive-article-date">
-  	<time datetime="2019-03-01T11:02:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-01</time>
+        <a href="/2019/02/19/%E5%85%AB%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93%E4%B9%8B%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%EF%BC%8C%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%EF%BC%8C%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%EF%BC%8C%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2019-02-19T01:13:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><h2 id="1-线程池思想概述"><a href="#1-线程池思想概述" class="headerlink" title="1. 线程池思想概述"></a>1. 线程池思想概述</h2><p>我们使用线程的时候就去创建一个线程，这样实现起来非常简便，但是就会有一个问题：</p>
-<p>如果并发的线程数量很多，并且每个线程都是执行一个时间很短的任务就结束了，这样频繁创建线程就会大大降低系统的效率，因为频繁创建线程和销毁线程需要时间。</p>
-<p>那么有没有一种办法使得线程可以复用，就是执行完一个任务，并不被销毁，而是可以继续执行其他的任务？</p>
-<p>在Java中可以通过线程池来达到这样的效果。今天我们就来详细讲解一下Java的线程池。</p>
-<h2 id="2-线程池概念"><a href="#2-线程池概念" class="headerlink" title="2. 线程池概念"></a>2. 线程池概念</h2><ul>
-<li><strong>线程池：</strong>其实就是一个容纳多个线程的容器，其中的线程可以反复使用，省去了频繁创建线程对象的操作，无需反复创建线程而消耗过多资源。</li>
-</ul>
-<p>合理利用线程池能够带来三个好处：</p>
-<ol>
-<li>降低资源消耗。减少了创建和销毁线程的次数，每个工作线程都可以被重复利用，可执行多个任务。</li>
-<li>提高响应速度。当任务到达时，任务可以不需要的等到线程创建就能立即执行。</li>
-<li>提高线程的可管理性。可以根据系统的承受能力，调整线程池中工作线线程的数目，防止因为消耗过多的内存，而把服务器累趴下(每个线程需要大约1MB内存，线程开的越多，消耗的内存也就越大，最后死机)。</li>
-</ol>
-<h2 id="3-线程池的使用"><a href="#3-线程池的使用" class="headerlink" title="3. 线程池的使用"></a>3. 线程池的使用</h2><p>Java里面线程池的顶级接口是<code>java.util.concurrent.Executor</code>，但是严格意义上讲<code>Executor</code>并不是一个线程池，而只是一个执行线程的工具。真正的线程池接口是<code>java.util.concurrent.ExecutorService</code>。</p>
-<p>要配置一个线程池是比较复杂的，尤其是对于线程池的原理不是很清楚的情况下，很有可能配置的线程池不是较优的，因此在<code>java.util.concurrent.Executors</code>线程工厂类里面提供了一些静态工厂，生成一些常用的线程池。官方建议使用Executors工程类来创建线程池对象。</p>
-<p>Executors类中有个创建线程池的方法如下：</p>
+        <p><img src="D:%5C%E7%94%B5%E8%84%91%E5%A3%81%E7%BA%B8%5Cmddd%5C%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95.PNG" alt=""></p>
+<h2 id="冒泡排序算法：（从后往前）bubbleSort"><a href="#冒泡排序算法：（从后往前）bubbleSort" class="headerlink" title="冒泡排序算法：（从后往前）bubbleSort"></a><strong>冒泡排序算法：</strong>（从后往前）bubbleSort</h2><p>比较相邻的两个数，若前面的数大于后面的数，则交换两个数；</p>
+<p>这样对0到n-1个数据进行遍历，那么最大的数据就会被排到n-1处；</p>
+<p>重复步骤，直至再也不能交换。</p>
+ <a id="more"></a> 
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static void bubbleSort1(int [] input,int n)&#123;</span><br><span class="line">        &#x2F;&#x2F;外围循环n-1次，每次确定一个元素的位置，位于尾部</span><br><span class="line">        for(int i&#x3D;0;i&lt;n-1;i++)&#123;</span><br><span class="line">            &#x2F;&#x2F;内部循环，相邻元素进行比较，比较次数逐步减1</span><br><span class="line">            for(int j&#x3D;0;j&lt;n-1-i;j++)&#123;</span><br><span class="line">                &#x2F;&#x2F;从小到大排序</span><br><span class="line">                if(input[j]&gt;input[j+1])&#123;</span><br><span class="line">                    int temp &#x3D; input[j];</span><br><span class="line">                    input[j] &#x3D; input[j+1];</span><br><span class="line">                    input[j+1] &#x3D; temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于一些数据，前面部分是乱序的，而后面部分是有序的。当前面的排序好后，后面的元素排序还需要重复前面的操作，这种做法是非常多余的。对与这种情况可以做出优化，比如加上一个标志（flag），初始值为false，有交换则置为true，如果某次排序没有交换元素，则表明后面的元素是有序的，跳出循环，排序结束。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public static void bubbleSort2(int [] input,int n)&#123;</span><br><span class="line">        &#x2F;&#x2F;外围循环n-1次，每次确定一个元素的位置，位于尾部</span><br><span class="line">        for(int i&#x3D;0;i&lt;n-1;i++)&#123;</span><br><span class="line">            &#x2F;&#x2F;标记位，如果这一趟发生了交换，则为true，否则为false。明显如果有一趟没有发生交换，说明排序已经完成。</span><br><span class="line">            boolean flag &#x3D; false;</span><br><span class="line">            &#x2F;&#x2F;内部循环，相邻元素进行比较，比较次数逐步减1</span><br><span class="line">            for(int j&#x3D;0;j&lt;n-1-i;j++)&#123;</span><br><span class="line">                &#x2F;&#x2F;从小到大排序</span><br><span class="line">                if(input[j]&gt;input[j+1])&#123;</span><br><span class="line">                    int temp &#x3D; input[j];</span><br><span class="line">                    input[j] &#x3D; input[j+1];</span><br><span class="line">                    input[j+1] &#x3D; temp;</span><br><span class="line">                    &#x2F;&#x2F;发生交换，置flag为true</span><br><span class="line">                    flag&#x3D;true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            &#x2F;&#x2F;没有发生交换，则表明已是有序，跳出循环</span><br><span class="line">            if(flag&#x3D;&#x3D;false)&#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;       </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p> 时间复杂度O(n^2) , 算法稳定性：稳定 </p>
+<h2 id="快速排序算法（快排）：quickSort"><a href="#快速排序算法（快排）：quickSort" class="headerlink" title="快速排序算法（快排）：quickSort"></a><strong>快速排序算法（快排）</strong>：quickSort</h2><p>它的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。<br>注意：第一遍快速排序不会直接得到最终结果，只能确定一个数的最终位置。为了得到最后结果，必须继续分解数组，直到数组不能再分解为止（只有一个数据），才能得到正确结果。</p>
 <ul>
-<li><code>public static ExecutorService newFixedThreadPool(int nThreads)</code>：返回线程池对象。(创建的是有界线程池,也就是池中的线程个数可以指定最大数量)</li>
-</ul>
-<p>获取到了一个线程池ExecutorService 对象，那么怎么使用呢，在这里定义了一个使用线程池对象的方法如下：</p>
-<ul>
-<li><p><code>public Future&lt;?&gt; submit(Runnable task)</code>:获取线程池中的某一个线程对象，并执行</p>
-<blockquote>
-<p>Future接口：用来记录线程任务执行完毕后产生的结果。线程池创建与使用。</p>
-</blockquote>
+<li><p>先从数列中取出一个数作为基准数</p>
+</li>
+<li><p>分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。</p>
+</li>
+<li><p>再对左右区间重复第二步，直到各区间只有一个数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">public static void quickSort(int low,int high,int []input)&#123;</span><br><span class="line">        if(low&lt;high)&#123;</span><br><span class="line">            int pivotloc &#x3D; partion1(low,high,input);</span><br><span class="line">            quickSort(low,pivotloc-1,input);</span><br><span class="line">            quickSort(pivotloc+1,high,input);</span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;</span><br><span class="line">    public static int partion1(int low,int high,int[]input)&#123;</span><br><span class="line">        &#x2F;&#x2F;开始挖坑，input[low]为枢纽，其值保存在pivotkey中，可以将其他数据填充过来</span><br><span class="line">        int pivotkey &#x3D; input[low];</span><br><span class="line">        while(low&lt;high)&#123;</span><br><span class="line">            &#x2F;&#x2F;从后向前，直到找到小于pivotkey的值</span><br><span class="line">            while(low&lt;high&amp;&amp;input[high]&gt;&#x3D;pivotkey)&#123;</span><br><span class="line">                high--;</span><br><span class="line">            &#125;</span><br><span class="line">            &#x2F;&#x2F;加上判断条件是因为当high&#x3D;&#x3D;low，不必操作下面的语句</span><br><span class="line">            if(low&lt;high)&#123;</span><br><span class="line">                &#x2F;&#x2F;在low的位置上填坑，又形成了一个新坑</span><br><span class="line">                input[low] &#x3D; input[high];</span><br><span class="line">                &#x2F;&#x2F;从下一个位置开始</span><br><span class="line">                low++;</span><br><span class="line">            &#125;</span><br><span class="line">            &#x2F;&#x2F;从前向后，直到找到大于pivotkey的值</span><br><span class="line">            while(low&lt;high&amp;&amp;input[low]&lt;&#x3D;pivotkey)&#123;</span><br><span class="line">                low++;</span><br><span class="line">            &#125;</span><br><span class="line">            if(low&lt;high)&#123;</span><br><span class="line">                &#x2F;&#x2F;在high的位置上填坑，又形成了一个新坑</span><br><span class="line">                input[high]&#x3D;input[low];</span><br><span class="line">                &#x2F;&#x2F;从下一个位置开始</span><br><span class="line">                high--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;****low&#x3D;&#x3D;high,退出时，将pivotkey填到这个坑****pivotkey一直只是用与比较没有被填充过，当low&#x3D;&#x3D;high，将其填充</span><br><span class="line">        input[low] &#x3D; pivotkey;</span><br><span class="line">        return low;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="直接插入排序：-insertSort"><a href="#直接插入排序：-insertSort" class="headerlink" title="直接插入排序： insertSort"></a><strong>直接插入排序：</strong> insertSort</h2><p> 直接插入排序时使用顺序查找，找到关键字应该插入的位置，然后将该位置后面的所有元素向后移动。然后将要插入的值插入目标位置。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void insertSort2(int []input)&#123;</span><br><span class="line">        for(int i&#x3D;1;i&lt;input.length;i++)&#123;</span><br><span class="line">            for(int j&#x3D;i-1;j&gt;&#x3D;0;j--)&#123;</span><br><span class="line">                &#x2F;&#x2F;基于有i前面的元素数有序的，交换之后input[i]的值向前移动了一位，直到有input[j]&lt;input[j+1]为止</span><br><span class="line">                if(input[j]&gt;input[j+1])&#123;</span><br><span class="line">                    int temp &#x3D; input[j];</span><br><span class="line">                    input[j] &#x3D; input[j+1];</span><br><span class="line">                    input[j+1] &#x3D; temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="希尔排序：：shellSort"><a href="#希尔排序：：shellSort" class="headerlink" title="希尔排序：：shellSort"></a><strong>希尔排序</strong>：：shellSort</h2><p>希尔排序(Shell Sort)是插入排序的一种。也称缩小增量排序，是直接插入排序算法的一种更高效的改进版本。<br>基本思想是：先取一个小于n的整数d1作为第一个增量，把文件的全部记录分组。所有距离为d1的倍数的记录放在同一个组中。先在各组内进行直接插入排序；然后，取第二个增量d2(d2小于d1),重复上述的分组和排序;依次取d3、d4、…..直至取到dt=1为止,即所有记录放在同一组中进行直接插入排序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">import java.io.BufferedReader;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStreamReader;</span><br><span class="line">import java.io.StreamTokenizer;</span><br><span class="line"></span><br><span class="line">public class ShellSort &#123;</span><br><span class="line">    public static void shellInsert(int[]input,int dk)&#123;</span><br><span class="line">        &#x2F;*</span><br><span class="line">         * 对数组做一趟希尔排序。本算法和直接插入排序相比，做了如下修改：</span><br><span class="line">         * 前后记录位置的增量是dk，而不是1;</span><br><span class="line">         * *&#x2F;</span><br><span class="line">        &#x2F;&#x2F;所有距离为dk的倍数的记录放在同一个组中，对组内元素进行直接插入排序</span><br><span class="line">        for(int i&#x3D;dk;i&lt;input.length;i++)&#123;</span><br><span class="line">            if(input[i-dk]&gt;input[i])&#123;</span><br><span class="line">                &#x2F;&#x2F;用于保存将要插入有序分组的元素input[i]</span><br><span class="line">                int temp &#x3D; input[i];</span><br><span class="line">                &#x2F;&#x2F;&#x2F;&#x2F;收索和移动同时进行</span><br><span class="line">                int j &#x3D; i-dk;</span><br><span class="line">                for(;j&gt;&#x3D;0&amp;&amp;input[j]&gt;temp;j-&#x3D;dk)&#123;</span><br><span class="line">                    &#x2F;&#x2F;input[j]后移dk位，在input[j]处挖了一个坑</span><br><span class="line">                    input[j+dk] &#x3D; input[j];</span><br><span class="line">                &#125;</span><br><span class="line">                &#x2F;&#x2F;填坑</span><br><span class="line">                input[j+dk] &#x3D; temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;       </span><br><span class="line">    &#125;</span><br><span class="line">    public static void shellSort(int []input,int[]dk)&#123;</span><br><span class="line">        for(int i&#x3D;0;i&lt;dk.length;i++)&#123;</span><br><span class="line">            &#x2F;&#x2F;执行多个分组插入排序，但最后一个dk，必须是1</span><br><span class="line">            shellInsert(input,dk[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) throws IOException &#123;</span><br><span class="line">        StreamTokenizer cin &#x3D; new StreamTokenizer (new BufferedReader(new InputStreamReader(System.in)));</span><br><span class="line">        while(cin.nextToken()!&#x3D;cin.TT_EOF)&#123;</span><br><span class="line">            int n &#x3D;(int)cin.nval;</span><br><span class="line">            int []input &#x3D; new int[n];</span><br><span class="line">            for(int i&#x3D;0;i&lt;n;i++)&#123;</span><br><span class="line">                cin.nextToken();</span><br><span class="line">                input[i] &#x3D; (int)cin.nval;</span><br><span class="line">            &#125;</span><br><span class="line">            int[]dk &#x3D;&#123;6,5,4,3,1&#125;;&#x2F;&#x2F;&#123;6,5,1&#125;、&#123;4,3,1&#125;都是合理的</span><br><span class="line">            shellSort(input,dk);</span><br><span class="line">            for(int i&#x3D;0;i&lt;input.length;i++)&#123;</span><br><span class="line">                System.out.print(input[i]+&quot; &quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
-<p>使用线程池中线程对象的步骤：</p>
-<ol>
-<li>创建线程池对象。</li>
-<li>创建Runnable接口子类对象。(task)</li>
-<li>提交Runnable接口子类对象。(take task)</li>
-<li>关闭线程池(一般不做)。</li>
-</ol>
-<p>Runnable实现类代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyRunnable</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"我要一个教练"</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"教练来了： "</span> + Thread.currentThread().getName());</span><br><span class="line">        System.out.println(<span class="string">"教我游泳,交完后，教练回到了游泳池"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>线程池测试类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadPoolDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建线程池对象</span></span><br><span class="line">        ExecutorService service = Executors.newFixedThreadPool(<span class="number">2</span>);<span class="comment">//包含2个线程对象</span></span><br><span class="line">        <span class="comment">// 创建Runnable实例对象</span></span><br><span class="line">        MyRunnable r = <span class="keyword">new</span> MyRunnable();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//自己创建线程对象的方式</span></span><br><span class="line">        <span class="comment">// Thread t = new Thread(r);</span></span><br><span class="line">        <span class="comment">// t.start(); ---&gt; 调用MyRunnable中的run()</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 从线程池中获取线程对象,然后调用MyRunnable中的run()</span></span><br><span class="line">        service.submit(r);</span><br><span class="line">        <span class="comment">// 再获取个线程对象，调用MyRunnable中的run()</span></span><br><span class="line">        service.submit(r);</span><br><span class="line">        service.submit(r);</span><br><span class="line">        <span class="comment">// 注意：submit方法调用结束后，程序并不终止，是因为线程池控制了线程的关闭。</span></span><br><span class="line">        <span class="comment">// 将使用完的线程又归还到了线程池中</span></span><br><span class="line">        <span class="comment">// 关闭线程池</span></span><br><span class="line">        <span class="comment">//service.shutdown();</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -309,7 +302,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/01/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/02/19/%E5%85%AB%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93%E4%B9%8B%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%EF%BC%8C%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%EF%BC%8C%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%EF%BC%8C%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F%EF%BC%89/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -323,20 +316,15 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/03/12/%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%8C%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/02/22/%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          常用设计模式(工厂模式，代理模式)
+          线程基础
         
       </div>
     </a>
   
-  
-    <a href="/2019/02/24/%E7%BA%BF%E7%A8%8B%E7%AD%89%E5%BE%85%E5%94%A4%E9%86%92%E6%9C%BA%E5%88%B6/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">线程等待唤醒机制</div>
-      <i class="icon-circle-right"></i>
-    </a>
   
 </nav>
 
@@ -361,7 +349,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#线程池"><span class="toc-number">1.</span> <span class="toc-text">线程池</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-线程池思想概述"><span class="toc-number">1.1.</span> <span class="toc-text">1. 线程池思想概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-线程池概念"><span class="toc-number">1.2.</span> <span class="toc-text">2. 线程池概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-线程池的使用"><span class="toc-number">1.3.</span> <span class="toc-text">3. 线程池的使用</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#冒泡排序算法：（从后往前）bubbleSort"><span class="toc-number">1.</span> <span class="toc-text">冒泡排序算法：（从后往前）bubbleSort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速排序算法（快排）：quickSort"><span class="toc-number">2.</span> <span class="toc-text">快速排序算法（快排）：quickSort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直接插入排序：-insertSort"><span class="toc-number">3.</span> <span class="toc-text">直接插入排序： insertSort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#希尔排序：：shellSort"><span class="toc-number">4.</span> <span class="toc-text">希尔排序：：shellSort</span></a></li></ol>
                     </div>
                 </span>
             </div>
