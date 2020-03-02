@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>字节流，字符流 | hulong blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="IO概述什么是IO生活中，你肯定经历过这样的场景。当你编辑一个文本文件，忘记了ctrl+s ，可能文件就白白编辑了。当你电脑上插入一个U盘，可以把一个视频，拷贝到你的电脑硬盘里。那么数据都是在哪些设备上的呢？键盘、内存、硬盘、外接设备等等。 我们把这种数据的传输，可以看做是一种数据的流动，按照流动的方向，以内存为基准，分为输入input 和输出output ，即流向内存是输入流，流出内存的输出流。">
+  <meta name="description" content="IO概述什么是IO当编辑一个文本文件，忘记了ctrl+s ，可能文件就白白编辑了。当电脑上插入一个U盘，可以把一个视频，拷贝到电脑硬盘里。那么数据都是在哪些设备上的呢？键盘、内存、硬盘、外接设备等等。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="字节流，字符流">
 <meta property="og:url" content="http://yoursite.com/2019/06/12/%E5%AD%97%E8%8A%82%E6%B5%81%EF%BC%8C%E5%AD%97%E7%AC%A6%E6%B5%81/index.html">
 <meta property="og:site_name" content="hulong blog">
-<meta property="og:description" content="IO概述什么是IO生活中，你肯定经历过这样的场景。当你编辑一个文本文件，忘记了ctrl+s ，可能文件就白白编辑了。当你电脑上插入一个U盘，可以把一个视频，拷贝到你的电脑硬盘里。那么数据都是在哪些设备上的呢？键盘、内存、硬盘、外接设备等等。 我们把这种数据的传输，可以看做是一种数据的流动，按照流动的方向，以内存为基准，分为输入input 和输出output ，即流向内存是输入流，流出内存的输出流。">
+<meta property="og:description" content="IO概述什么是IO当编辑一个文本文件，忘记了ctrl+s ，可能文件就白白编辑了。当电脑上插入一个U盘，可以把一个视频，拷贝到电脑硬盘里。那么数据都是在哪些设备上的呢？键盘、内存、硬盘、外接设备等等。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-06-12T09:50:50.000Z">
-<meta property="article:modified_time" content="2020-03-02T09:56:59.554Z">
+<meta property="article:modified_time" content="2020-03-02T13:23:17.286Z">
 <meta property="article:author" content="hulong">
 <meta name="twitter:card" content="summary">
   
@@ -182,8 +182,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="IO概述"><a href="#IO概述" class="headerlink" title="IO概述"></a>IO概述</h1><h2 id="什么是IO"><a href="#什么是IO" class="headerlink" title="什么是IO"></a>什么是IO</h2><p>生活中，你肯定经历过这样的场景。当你编辑一个文本文件，忘记了<code>ctrl+s</code> ，可能文件就白白编辑了。当你电脑上插入一个U盘，可以把一个视频，拷贝到你的电脑硬盘里。那么数据都是在哪些设备上的呢？键盘、内存、硬盘、外接设备等等。</p>
-<p>我们把这种数据的传输，可以看做是一种数据的流动，按照流动的方向，以内存为基准，分为<code>输入input</code> 和<code>输出output</code> ，即流向内存是输入流，流出内存的输出流。</p>
+        <h1 id="IO概述"><a href="#IO概述" class="headerlink" title="IO概述"></a>IO概述</h1><h2 id="什么是IO"><a href="#什么是IO" class="headerlink" title="什么是IO"></a>什么是IO</h2><p>当编辑一个文本文件，忘记了<code>ctrl+s</code> ，可能文件就白白编辑了。当电脑上插入一个U盘，可以把一个视频，拷贝到电脑硬盘里。那么数据都是在哪些设备上的呢？键盘、内存、硬盘、外接设备等等。</p>
+<a id="more"></a>
+
+<p>这种数据的传输，可以看做是一种数据的流动，按照流动的方向，以内存为基准，分为<code>输入input</code> 和<code>输出output</code> ，即流向内存是输入流，流出内存的输出流。</p>
 <p>Java中I/O操作主要是指使用<code>java.io</code>包下的内容，进行输入、输出操作。<strong>输入</strong>也叫做<strong>读取</strong>数据，<strong>输出</strong>也叫做作<strong>写出</strong>数据。</p>
 <h2 id="IO的分类"><a href="#IO的分类" class="headerlink" title="IO的分类"></a>IO的分类</h2><p>根据数据的流向分为：<strong>输入流</strong>和<strong>输出流</strong>。</p>
 <ul>

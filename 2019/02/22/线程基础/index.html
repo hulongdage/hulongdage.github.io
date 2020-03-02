@@ -16,7 +16,7 @@
 <meta property="og:description" content="线程基础多线程1.并发与并行 并发：指两个或多个事件在同一个时间段内发生。 并行：指两个或多个事件在同一时刻发生（同时发生）。   注意：单核处理器的计算机肯定是不能并行的处理多个任务的，只能是多个任务在单个CPU上并发运行。同理,线程也是一样的，从宏观角度上理解线程是并行运行的，但是从微观角度上分析却是串行运行的，即一个线程一个线程的去运行，当系统只有一个CPU时，线程会以某种顺序执行多个线程，">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-02-22T10:11:53.000Z">
-<meta property="article:modified_time" content="2020-02-22T10:20:52.204Z">
+<meta property="article:modified_time" content="2020-03-02T13:23:40.032Z">
 <meta property="article:author" content="hulong">
 <meta name="twitter:card" content="summary">
   
@@ -189,6 +189,8 @@
 <blockquote>
 <p>注意：单核处理器的计算机肯定是不能并行的处理多个任务的，只能是多个任务在单个CPU上并发运行。同理,线程也是一样的，从宏观角度上理解线程是并行运行的，但是从微观角度上分析却是串行运行的，即一个线程一个线程的去运行，当系统只有一个CPU时，线程会以某种顺序执行多个线程，我们把这种情况称之为线程调度。</p>
 </blockquote>
+<a id="more"></a>
+
 <h2 id="2-线程与进程"><a href="#2-线程与进程" class="headerlink" title="2. 线程与进程"></a>2. 线程与进程</h2><ul>
 <li><p><strong>进程</strong>：是指一个内存中运行的应用程序，每个进程都有一个独立的内存空间，一个应用程序可以同时运行多个进程；进程也是程序的一次执行过程，是系统运行程序的基本单位；系统运行一个程序即是一个进程从创建、运行到消亡的过程。</p>
 </li>

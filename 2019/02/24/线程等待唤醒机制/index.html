@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>线程等待唤醒机制 | hulong blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="线程池等待唤醒机制1 .线程间通信概念：多个线程在处理同一个资源，但是处理的动作（线程的任务）却不相同。 比如：线程A用来生成包子的，线程B用来吃包子的，包子可以理解为同一资源，线程A与线程B处理的动作，一个是生产，一个是消费，那么线程A与线程B之间就存在线程通信问题。 为什么要处理线程间通信： 多个线程并发执行时, 在默认情况下CPU是随机切换线程的，当我们需要多个线程来共同完成一件任务，并且我">
+  <meta name="description" content="线程池等待唤醒机制1 .线程间通信概念：多个线程在处理同一个资源，但是处理的动作（线程的任务）却不相同。 比如：线程A用来生成包子的，线程B用来吃包子的，包子可以理解为同一资源，线程A与线程B处理的动作，一个是生产，一个是消费，那么线程A与线程B之间就存在线程通信问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线程等待唤醒机制">
 <meta property="og:url" content="http://yoursite.com/2019/02/24/%E7%BA%BF%E7%A8%8B%E7%AD%89%E5%BE%85%E5%94%A4%E9%86%92%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="hulong blog">
-<meta property="og:description" content="线程池等待唤醒机制1 .线程间通信概念：多个线程在处理同一个资源，但是处理的动作（线程的任务）却不相同。 比如：线程A用来生成包子的，线程B用来吃包子的，包子可以理解为同一资源，线程A与线程B处理的动作，一个是生产，一个是消费，那么线程A与线程B之间就存在线程通信问题。 为什么要处理线程间通信： 多个线程并发执行时, 在默认情况下CPU是随机切换线程的，当我们需要多个线程来共同完成一件任务，并且我">
+<meta property="og:description" content="线程池等待唤醒机制1 .线程间通信概念：多个线程在处理同一个资源，但是处理的动作（线程的任务）却不相同。 比如：线程A用来生成包子的，线程B用来吃包子的，包子可以理解为同一资源，线程A与线程B处理的动作，一个是生产，一个是消费，那么线程A与线程B之间就存在线程通信问题。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-02-24T06:19:06.000Z">
-<meta property="article:modified_time" content="2020-02-22T11:30:25.576Z">
+<meta property="article:modified_time" content="2020-03-02T13:23:58.497Z">
 <meta property="article:author" content="hulong">
 <meta name="twitter:card" content="summary">
   
@@ -184,7 +184,9 @@
       
         <h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><h1 id="等待唤醒机制"><a href="#等待唤醒机制" class="headerlink" title="等待唤醒机制"></a>等待唤醒机制</h1><h2 id="1-线程间通信"><a href="#1-线程间通信" class="headerlink" title="1 .线程间通信"></a>1 .线程间通信</h2><p><strong>概念：</strong>多个线程在处理同一个资源，但是处理的动作（线程的任务）却不相同。</p>
 <p>比如：线程A用来生成包子的，线程B用来吃包子的，包子可以理解为同一资源，线程A与线程B处理的动作，一个是生产，一个是消费，那么线程A与线程B之间就存在线程通信问题。</p>
-<p><strong>为什么要处理线程间通信：</strong></p>
+<a id="more"></a>
+
+<p>为什么要处理线程间通信：**</p>
 <p>多个线程并发执行时, 在默认情况下CPU是随机切换线程的，当我们需要多个线程来共同完成一件任务，并且我们希望他们有规律的执行, 那么多线程之间需要一些协调通信，以此来帮我们达到多线程共同操作一份数据。</p>
 <p><strong>如何保证线程间通信有效利用资源：</strong></p>
 <p>多个线程在处理同一个资源，并且任务不同时，需要线程通信来帮助解决线程之间对同一个变量的使用或操作。 就是多个线程在操作同一份数据时， 避免对同一共享变量的争夺。也就是我们需要通过一定的手段使各个线程能有效的利用资源。而这种手段即—— <strong>等待唤醒机制。</strong></p>
