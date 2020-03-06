@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>HashMap实现原理 | hulong blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问题背景：现要将10个人的电话号码记录在一个本子上，以便以后某天有急事能快速找到他们。  方案一：直接在本子上写上10人对应的名字和电话号码。如：张三 111 ；李四 222；王五 333 ……  方案二：在本子上以姓名的首字母划分，并记录电话号码。如：Z-张三 111  ; L-李四 222；W-王五 333 现在我要找张三的电话号码了，来看看是怎么找的  方案一：把所有的记录都比较一次，如果">
+  <meta name="description" content="问题背景：现要将10个人的电话号码记录在一个本子上，以便以后某天有急事能快速找到他们。  方案一：直接在本子上写上10人对应的名字和电话号码。如：张三 111 ；李四 222；王五 333 ……  方案二：在本子上以姓名的首字母划分，并记录电话号码。如：Z-张三 111  ; L-李四 222；W-王五 333">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HashMap实现原理">
 <meta property="og:url" content="http://yoursite.com/2020/03/04/HashMap%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="hulong blog">
-<meta property="og:description" content="问题背景：现要将10个人的电话号码记录在一个本子上，以便以后某天有急事能快速找到他们。  方案一：直接在本子上写上10人对应的名字和电话号码。如：张三 111 ；李四 222；王五 333 ……  方案二：在本子上以姓名的首字母划分，并记录电话号码。如：Z-张三 111  ; L-李四 222；W-王五 333 现在我要找张三的电话号码了，来看看是怎么找的  方案一：把所有的记录都比较一次，如果">
+<meta property="og:description" content="问题背景：现要将10个人的电话号码记录在一个本子上，以便以后某天有急事能快速找到他们。  方案一：直接在本子上写上10人对应的名字和电话号码。如：张三 111 ；李四 222；王五 333 ……  方案二：在本子上以姓名的首字母划分，并记录电话号码。如：Z-张三 111  ; L-李四 222；W-王五 333">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-04T10:37:20.000Z">
-<meta property="article:modified_time" content="2020-03-04T12:03:12.490Z">
+<meta property="article:modified_time" content="2020-03-06T09:45:36.568Z">
 <meta property="article:author" content="hulong">
 <meta name="twitter:card" content="summary">
   
@@ -188,7 +188,9 @@
 <li><p>方案一：直接在本子上写上10人对应的名字和电话号码。如：张三 111 ；李四 222；王五 333 ……</p>
 </li>
 <li><p>方案二：在本子上以姓名的首字母划分，并记录电话号码。如：Z-张三 111  ; L-李四 222；W-王五 333</p>
-<p>现在我要找张三的电话号码了，来看看是怎么找的</p>
+ <a id="more"></a>
+
+<p> 现在我要找张三的电话号码了，来看看是怎么找的</p>
 </li>
 <li><p>方案一：把所有的记录都比较一次，如果张三在最前面，我一次就能找到，如果张三在最后，那我要找10      次，如果我要存100个、1000个、10000个人的电话号码呢？那我还不气得把本子撕咯？</p>
 </li>
