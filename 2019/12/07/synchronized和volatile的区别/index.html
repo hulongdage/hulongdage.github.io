@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>HashMap实现原理 | hulong blog</title>
+  <title>synchronized和volatile的区别 | hulong blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问题背景：现要将10个人的电话号码记录在一个本子上，以便以后某天有急事能快速找到他们。  方案一：直接在本子上写上10人对应的名字和电话号码。如：张三 111 ；李四 222；王五 333 ……  方案二：在本子上以姓名的首字母划分，并记录电话号码。如：Z-张三 111  ; L-李四 222；W-王五 333">
+  <meta name="description" content="volatile和synchronized特点首先需要理解线程安全的两个方面：执行控制和内存可见。  执行控制的目的是控制代码执行（顺序）及是否可以并发执行。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HashMap实现原理">
-<meta property="og:url" content="http://yoursite.com/2020/03/04/HashMap%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:title" content="synchronized和volatile的区别">
+<meta property="og:url" content="http://yoursite.com/2019/12/07/synchronized%E5%92%8Cvolatile%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
 <meta property="og:site_name" content="hulong blog">
-<meta property="og:description" content="问题背景：现要将10个人的电话号码记录在一个本子上，以便以后某天有急事能快速找到他们。  方案一：直接在本子上写上10人对应的名字和电话号码。如：张三 111 ；李四 222；王五 333 ……  方案二：在本子上以姓名的首字母划分，并记录电话号码。如：Z-张三 111  ; L-李四 222；W-王五 333">
+<meta property="og:description" content="volatile和synchronized特点首先需要理解线程安全的两个方面：执行控制和内存可见。  执行控制的目的是控制代码执行（顺序）及是否可以并发执行。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-04T10:37:20.000Z">
-<meta property="article:modified_time" content="2020-03-06T12:32:55.472Z">
+<meta property="article:published_time" content="2019-12-07T02:21:16.000Z">
+<meta property="article:modified_time" content="2020-03-07T02:39:09.696Z">
 <meta property="article:author" content="hulong">
 <meta property="article:tag" content="随笔">
 <meta name="twitter:card" content="summary">
@@ -163,112 +163,45 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-HashMap实现原理" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-synchronized和volatile的区别" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      HashMap实现原理
+      synchronized和volatile的区别
     </h1>
   
 
         
-        <a href="/2020/03/04/HashMap%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" class="archive-article-date">
-  	<time datetime="2020-03-04T10:37:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-04</time>
+        <a href="/2019/12/07/synchronized%E5%92%8Cvolatile%E7%9A%84%E5%8C%BA%E5%88%AB/" class="archive-article-date">
+  	<time datetime="2019-12-07T02:21:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li><p>问题背景：现要将10个人的电话号码记录在一个本子上，以便以后某天有急事能快速找到他们。</p>
-</li>
-<li><p>方案一：直接在本子上写上10人对应的名字和电话号码。如：张三 111 ；李四 222；王五 333 ……</p>
-</li>
-<li><p>方案二：在本子上以姓名的首字母划分，并记录电话号码。如：Z-张三 111  ; L-李四 222；W-王五 333</p>
- <a id="more"></a>
+        <h3 id="volatile和synchronized特点"><a href="#volatile和synchronized特点" class="headerlink" title="volatile和synchronized特点"></a>volatile和synchronized特点</h3><p>首先需要理解线程安全的两个方面：<strong>执行控制</strong>和<strong>内存可见</strong>。 </p>
+<p><strong>执行控制</strong>的目的是控制代码执行（顺序）及是否可以并发执行。</p>
+<a id="more"></a>
 
-<p> 现在我要找张三的电话号码了，来看看是怎么找的</p>
-</li>
-<li><p>方案一：把所有的记录都比较一次，如果张三在最前面，我一次就能找到，如果张三在最后，那我要找10      次，如果我要存100个、1000个、10000个人的电话号码呢？那我还不气得把本子撕咯？</p>
-</li>
-<li><p>方案二： 直接去Z分类里边儿找，一发入魂。但是如果出现很多姓名的首字母是Z的人，比如Z-赵六 444、Z-周七 555 ，当我存的电话多起来，我一样需要找好多次。</p>
-<h3 id="什么是Hash？"><a href="#什么是Hash？" class="headerlink" title="什么是Hash？"></a>什么是Hash？</h3><p>Hash，一般翻译做“散列”，也有直接音译为“哈希”的，就是把任意长度的<a href="https://baike.baidu.com/item/输入/5481954" target="_blank" rel="noopener">输入</a>，通过散列算法变换成固定长度的<a href="https://baike.baidu.com/item/输出/11056752" target="_blank" rel="noopener">输出</a>，该输出就是散列值。ok，这样的定义可能比较抽象。咱们结合上面提到的方案二的例子一句一句解释。 </p>
-</li>
+<p><strong>内存可见</strong>控制的是线程执行结果在内存中对其它线程的可见性。根据Java内存模型的实现，线程在具体执行时，会先拷贝主存数据到线程本地（CPU缓存），操作完成后再把结果从线程本地刷到主存。</p>
+<p><code>synchronized</code>关键字解决的是执行控制的问题，它会阻止其它线程获取当前对象的监控锁，这样就使得当前对象中被<code>synchronized</code>关键字保护的代码块无法被其它线程访问，也就无法并发执行。更重要的是，<code>synchronized</code>还会创建一个<strong>内存屏障</strong>，内存屏障指令保证了所有CPU操作结果都会直接刷到主存中，从而保证了操作的内存可见性，同时也使得先获得这个锁的线程的所有操作，都<strong>happens-before</strong>于随后获得这个锁的线程的操作。</p>
+<p><code>volatile</code>关键字解决的是内存可见性的问题，会使得所有对<code>volatile</code>变量的读写都会直接刷到主存，即保证了变量的可见性。这样就能满足一些对变量可见性有要求而对读取顺序没有要求的需求。</p>
+<p>使用<code>volatile</code>关键字仅能实现对原始变量(如boolen、 short 、int 、long等)操作的原子性，但需要特别注意， <code>volatile</code>不能保证复合操作的原子性，即使只是<code>i++</code>，实际上也是由多个原子操作组成：<code>read i; inc; write i</code>，假如多个线程同时执行<code>i++</code>，<code>volatile</code>只能保证他们操作的<code>i</code>是同一块内存，但依然可能出现写入脏数据的情况。</p>
+<p>在Java 5提供了原子数据类型<code>atomic wrapper classes</code>，对它们的<code>increase</code>之类的操作都是原子操作，不需要使用<code>sychronized</code>关键字。</p>
+<p>对于volatile关键字，当且仅当满足以下所有条件时可使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 对变量的写入操作不依赖变量的当前值，或者你能确保只有单个线程更新变量的值。</span><br><span class="line">2. 该变量没有包含在具有其他变量的不变式中。</span><br></pre></td></tr></table></figure>
+
+<h3 id="volatile和synchronized的区别"><a href="#volatile和synchronized的区别" class="headerlink" title="volatile和synchronized的区别"></a>volatile和synchronized的区别</h3><ul>
+<li>volatile本质是在告诉jvm当前变量在寄存器（工作内存）中的值是不确定的，需要从主存中读取； synchronized则是锁定当前变量，只有当前线程可以访问该变量，其他线程被阻塞住。</li>
+<li>volatile仅能使用在变量级别；synchronized则可以使用在变量、方法、和类级别的。</li>
+<li>volatile仅能实现变量的修改可见性，不能保证原子性；而synchronized则可以保证变量的修改可见性和原子性。</li>
+<li>volatile不会造成线程的阻塞；synchronized可能会造成线程的阻塞。</li>
+<li>volatile标记的变量不会被编译器优化；synchronized标记的变量可以被编译器优化。</li>
 </ul>
-<p>首先，在方案二中，人的姓名就是一个任意长度的输入。</p>
-<p>然后，在方案二中，我是按照姓名的首字母的大写去进行一个分类，这个划分的方式我们可以看成是散列算法。</p>
-<p>最后，固定长度的输出，即我把所有的电话全部存入了26个分类中。那么这26个字母就是散列值。</p>
-<h3 id="什么是Hash碰撞？"><a href="#什么是Hash碰撞？" class="headerlink" title="什么是Hash碰撞？"></a>什么是Hash碰撞？</h3><p>在上面的例子中，Z分类可能出现赵六、周七、钟八等等首字母为Z的姓名吧，我们说，这就发生了Hash碰撞。ok，方案二中我可以把姓名按照首字母划分，那我当然也可以按照百家姓去划分对不？那这样一来，我就会去张姓分类去找张三，赵姓分类里去找赵六，周姓分类里去找周七对吧。虽然这种划分方法能减少Hash碰撞的频率，提高查询的速度（时间），但是却需要比首字母划分更多的存储位置（空间）。由此可见，一个好的散列算法，是能够在时间和空间之间寻找平衡的。</p>
-<h3 id="java中HashMap是如何实现的？"><a href="#java中HashMap是如何实现的？" class="headerlink" title="java中HashMap是如何实现的？"></a>java中HashMap是如何实现的？</h3><p>大家都知道，HashMap底层使用的是数组加链表的数据结构实现的。</p>
-<p>java中HashMap是如何使用的？</p>
-<p>首先，得new一个HashMap对象不是？很多人都是用默认的无参构造器来创建HashMap对象的。ok咱们看一下jdk1.6中的源码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public HashMap() &#123;</span><br><span class="line">       &#x2F;&#x2F;加载因子，默认0.75</span><br><span class="line">       this.loadFactor &#x3D; DEFAULT_LOAD_FACTOR;</span><br><span class="line"></span><br><span class="line">       &#x2F;&#x2F;当HashMap中存储的键值对数超过threshold，会引起扩容</span><br><span class="line">       &#x2F;&#x2F;默认threshold为 默认数组长度*默认加载因子 即16*0.75</span><br><span class="line">       threshold &#x3D; (int)(DEFAULT_INITIAL_CAPACITY * DEFAULT_LOAD_FACTOR);</span><br><span class="line"></span><br><span class="line">       &#x2F;&#x2F;创建entry数组，默认值16</span><br><span class="line">       table &#x3D; new Entry[DEFAULT_INITIAL_CAPACITY];</span><br><span class="line">       init();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p> 注释写的很清楚，默认创建一个大小为16的entry数组，当HashMap里存的entry个数达到12，就会发生扩容，这当然会影响HashMap的性能不是？所以，推荐咱们使用HashMap提供的另外一个构造器。 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public HashMap(int initialCapacity) &#123;</span><br><span class="line">        this(initialCapacity, DEFAULT_LOAD_FACTOR);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p> 调用的是HashMap提供的另一个构造器，传入的加载因子为默认的0.75，继续看源码 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public HashMap(int initialCapacity, float loadFactor) &#123;</span><br><span class="line">       if (initialCapacity &lt; 0)</span><br><span class="line">           throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +</span><br><span class="line">                                              initialCapacity);</span><br><span class="line">       if (initialCapacity &gt; MAXIMUM_CAPACITY)</span><br><span class="line">           initialCapacity &#x3D; MAXIMUM_CAPACITY;</span><br><span class="line">       if (loadFactor &lt;&#x3D; 0 || Float.isNaN(loadFactor))</span><br><span class="line">           throw new IllegalArgumentException(&quot;Illegal load factor: &quot; +</span><br><span class="line">                                              loadFactor);</span><br><span class="line"></span><br><span class="line">       &#x2F;&#x2F; Find a power of 2 &gt;&#x3D; initialCapacity</span><br><span class="line">       int capacity &#x3D; 1;</span><br><span class="line">       while (capacity &lt; initialCapacity)</span><br><span class="line">           capacity &lt;&lt;&#x3D; 1;</span><br><span class="line"></span><br><span class="line">       this.loadFactor &#x3D; loadFactor;</span><br><span class="line">       threshold &#x3D; (int)(capacity * loadFactor);</span><br><span class="line">       table &#x3D; new Entry[capacity];</span><br><span class="line">       init();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p> 假如现在我要往HashMap里存12个键值对，那么经过代码段1： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">while (capacity &lt; initialCapacity)</span><br><span class="line">                     capacity &lt;&lt;&#x3D; 1;</span><br></pre></td></tr></table></figure>
-
-<p> 计算得出的capacity为16，然后再经过代码段2： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">threshold &#x3D; (int)(capacity * loadFactor);</span><br><span class="line">            table &#x3D; new Entry[capacity];</span><br></pre></td></tr></table></figure>
-
-<p>创建了一个threshold为12，数组大小为16的entry数组。刚好达到我们的要求。</p>
-<p>但是，如果我想要往HashMap里存16个键值对，那么经过代码段1，计算得出的capacity依然为16，然后经过代码段2创建了一个threshold为12，数组大小为16的entry数组。ok那当我往这个HashMap里存入第13个键值对的时候，就会引起扩容（因为threshold =12），扩容操作如果说基数小的话，对性能的影响可能不大，但随着基数的变大，对性能的影响也会随之变大。</p>
-<p>所以，推荐在使用这个构造器的时候，我们先计算一下，设你想存x个键值对，那么你应该传入的参数为y。默认加载因子为0.75，那么先用x除以0.75，然后再计算出比x/0.75大的最小的2的幂。</p>
-<p>ok，带入计算公式，我要存12个键值对，x=12，则x/0.75=16,因为2^4=16，所以y=16</p>
-<p>我要存15个键值对，x=15，x/0.75=20,那么大于20的最小的2的幂为32，y=32，我们传入参数32。这样就不会发生扩容。</p>
-<p>当然，理想很丰满，现实很骨感，实际开发中，我们基本上是无法确定我们要存入多少个键值对的，所以，管它呢，咱大概估一个值，传入就行了，但是最好不要使用默认的无参的构造器，原因很简单，假设我们现在要大概要存100个建值对，使用无参构造器，在存入16<em>0.75=12个建值对 的时候会发生第一次扩容，扩容为16</em>2=32，然后在插入32<em>0.75=28个建值对的时候发生第二次扩容，扩容为32</em>2=64，依次类推。但是我们调用new HashMap（100），那么，只会在我们插入第128*0.75=96个建值对的时候发生一次扩容。对性能的提升由此可见一斑。所以上面哔哔了那么多，其实还是没什么卵用的，哈哈哈哈。</p>
-<p>然后，当我们创建好HashMap的实例后，我们会调用它的put方法插入键值对，ok，上源码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public V put(K key, V value) &#123;</span><br><span class="line">       &#x2F;&#x2F;step 1</span><br><span class="line">       if (key &#x3D;&#x3D; null)</span><br><span class="line">           return putForNullKey(value);</span><br><span class="line"></span><br><span class="line">       &#x2F;&#x2F;step 2</span><br><span class="line">       int hash &#x3D; hash(key.hashCode());</span><br><span class="line"></span><br><span class="line">       &#x2F;&#x2F;step 3</span><br><span class="line">       int i &#x3D; indexFor(hash, table.length);</span><br><span class="line"></span><br><span class="line">       &#x2F;&#x2F;step 4</span><br><span class="line">       for (Entry&lt;K,V&gt; e &#x3D; table[i]; e !&#x3D; null; e &#x3D; e.next) &#123;</span><br><span class="line">           Object k;</span><br><span class="line">           if (e.hash &#x3D;&#x3D; hash &amp;&amp; ((k &#x3D; e.key) &#x3D;&#x3D; key || key.equals(k))) &#123;</span><br><span class="line">               V oldValue &#x3D; e.value;</span><br><span class="line">               e.value &#x3D; value;</span><br><span class="line">               e.recordAccess(this);</span><br><span class="line">               return oldValue;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       modCount++;</span><br><span class="line">       &#x2F;&#x2F;step 5</span><br><span class="line">       addEntry(hash, key, value, i);</span><br><span class="line">       return null;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>step1：如果传入的key为空，那么返回空键对应的值（HashMap允许一个null键）。</p>
-<p>step2：把key的hashcode经过一个hash算法，得到一个hash值。（这个方法咱不讨论，那是数学家研究的事）</p>
-<p>step3：根据上一步得到的hash值定位数组的下标。</p>
-<p>step4：上一步定位到数组的下标的位置如果有元素，取第一个元素，判断他们的hash值是否相同，如果相同，再判断两个对象是否相等。如果hash值不同，或hash值相同，却不相等，判断第二个元素。直到判断完所有的元素。</p>
-<p>step5：把当前元素作为数组下标位置的第一个元素，把之前的元素设为新插入元素的next节点，判断是否超过threshold，超过则扩容（addEntry逻辑说明）。</p>
-<p>ok，对比方案二的例子，我们把key看成是一个人，key的hashCode看成是人的姓名，value看成是电话号码。</p>
-<p>假如我现在要存张三的电话号码，那么，对应的：</p>
-<p>step2：把姓名按照首字母划分，得到hash值为Z。</p>
-<p>step3：找到Z所在的位置。</p>
-<p>step4：判断Z位置处第一个元素（假设Z位置处只有一个赵六），赵六的hash值也为Z，所以，继续比较到底是不是我要找de</p>
-<p>的张三，ok，不是，判断Z位置处不存在第二个元素，执行step5。</p>
-<p>step5：在Z位置处插入张三和他的电话号码，把赵六移到他的后面。</p>
-<p>这里需要注意的是step3中，根据hash值定位数组下标后，这个下标处的元素的hash值是不一定相等的。为什么？看step3处的方法的源码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">static int indexFor(int h, int length) &#123;</span><br><span class="line">        return h &amp; (length-1);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>假如传进来的hash值为1，那么返回的下标是1 &amp; 15</p>
-<p>java中int类型是32位那么 1 &amp; 15 如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span>  <span class="number">0000</span> <span class="number">0001</span>          -<span class="number">1</span>的二进制表示</span><br><span class="line"><span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span>  <span class="number">0000</span> <span class="number">1111</span>           -<span class="number">15</span>的二进制表示</span><br></pre></td></tr></table></figure>
-
-<p>对的整整齐齐，明明白白，一眼就能看出17  &amp;  15  =  1  </p>
-<p>综上，不同的hash值通过下标是可以定位到相同的数组位桶的。</p>
-<p>这里的这个定位算法和数组的长度也是有关系的，为什么HashMap的数组长度是2的幂？</p>
-<p>咱假设这里不是二的幂，看看会出现啥情况。</p>
-<p>若数组的长度是10，indexFor方法返回的是  h  &amp; 9  则</p>
-<p>0000 0000 0000 0000 0000 0000  0000 1001              -9的二进制表示</p>
-<p>看到最后4位，中间的两个0了么？无论你传进来的hash值是多少，中间那两个0相与，永远返回0。这样一来，就大大的增加了hash碰撞的概率。</p>
-<p>所以这时我们再来看看构造器中这一段代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">while (capacity &lt; initialCapacity)</span><br><span class="line">                        capacity &lt;&lt;&#x3D; 1;</span><br></pre></td></tr></table></figure>
-
-<p>它能保证初始化的数组的大小一定是2的幂。以便在定位数组位桶的下标时使用。</p>
-<p>最后，我们使用get方法，从HashMap中找到我们想要的键值对。来看看get方法的源码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public V get(Object key) &#123;</span><br><span class="line">       if (key &#x3D;&#x3D; null)</span><br><span class="line">           return getForNullKey();</span><br><span class="line">       int hash &#x3D; hash(key.hashCode());</span><br><span class="line">       for (Entry&lt;K,V&gt; e &#x3D; table[indexFor(hash, table.length)];</span><br><span class="line">            e !&#x3D; null;</span><br><span class="line">            e &#x3D; e.next) &#123;</span><br><span class="line">           Object k;</span><br><span class="line">           if (e.hash &#x3D;&#x3D; hash &amp;&amp; ((k &#x3D; e.key) &#x3D;&#x3D; key || key.equals(k)))</span><br><span class="line">               return e.value;</span><br><span class="line">       &#125;</span><br><span class="line">       return null;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p> 这个就不用多说了吧。先hash，再定位，再比较hash值，再equals。。。 </p>
-<h3 id="HashMap使用的一些建议"><a href="#HashMap使用的一些建议" class="headerlink" title="HashMap使用的一些建议"></a>HashMap使用的一些建议</h3><p>一般而言，HashMap的key是要用类似String、Integer这样的不可变类的。夺西碟？</p>
-<p>咱们看看String类的hashCode方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;成员变量hash，初始值为0.</span><br><span class="line">private int hash;</span><br><span class="line">public int hashCode() &#123;</span><br><span class="line">int h &#x3D; hash;</span><br><span class="line">   int len &#x3D; count;</span><br><span class="line">   &#x2F;&#x2F;如果h&#x3D;&#x3D;0代表第一次调用此方法，调用完之后，把计算出来的值付给成员变量hash</span><br><span class="line">   &#x2F;&#x2F;第二次调用此方法时，h &#x3D;&#x3D; 0 返回 false，直接return h。</span><br><span class="line">if (h &#x3D;&#x3D; 0 &amp;&amp; len &gt; 0) &#123;</span><br><span class="line">    int off &#x3D; offset;</span><br><span class="line">    char val[] &#x3D; value;</span><br><span class="line"></span><br><span class="line">           for (int i &#x3D; 0; i &lt; len; i++) &#123;</span><br><span class="line">               h &#x3D; 31*h + val[off++];</span><br><span class="line">           &#125;</span><br><span class="line">           hash &#x3D; h;</span><br><span class="line">       &#125;</span><br><span class="line">       return h;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用String当做key，只会在第一次调用hashCode方法时，计算出hash值，以后的调用直接使用已缓存的hash值即可。这样设计，又能大大的提升HashMap的性能。所以，推荐使用这种不可变类。</p>
-<p>当然，如果你想用自定义的类当做key，那么，请参考String类的设计，而且，这个你自定义的类必须是不可变得，至少参与hashCode计算的字段是不可变的，不然，会出现存进去的键值对和取出来的键值对不一致。</p>
 
       
 
@@ -369,7 +302,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/03/04/HashMap%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/07/synchronized%E5%92%8Cvolatile%E7%9A%84%E5%8C%BA%E5%88%AB/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -383,9 +316,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2020/03/04/HashMap%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          HashMap实现原理
+        
+      </div>
+    </a>
   
-    <a href="/2019/12/07/synchronized%E5%92%8Cvolatile%E7%9A%84%E5%8C%BA%E5%88%AB/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">synchronized和volatile的区别</div>
+  
+    <a href="/2019/07/18/%E9%80%92%E5%BD%92/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">递归</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -412,7 +354,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Hash？"><span class="toc-number">1.</span> <span class="toc-text">什么是Hash？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Hash碰撞？"><span class="toc-number">2.</span> <span class="toc-text">什么是Hash碰撞？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java中HashMap是如何实现的？"><span class="toc-number">3.</span> <span class="toc-text">java中HashMap是如何实现的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashMap使用的一些建议"><span class="toc-number">4.</span> <span class="toc-text">HashMap使用的一些建议</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile和synchronized特点"><span class="toc-number">1.</span> <span class="toc-text">volatile和synchronized特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile和synchronized的区别"><span class="toc-number">2.</span> <span class="toc-text">volatile和synchronized的区别</span></a></li></ol>
                     </div>
                 </span>
             </div>
