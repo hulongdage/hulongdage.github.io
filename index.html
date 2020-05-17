@@ -160,6 +160,307 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-乐观锁和悲观锁" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/13/%E4%B9%90%E8%A7%82%E9%94%81%E5%92%8C%E6%82%B2%E8%A7%82%E9%94%81/">乐观锁和悲观锁</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/13/%E4%B9%90%E8%A7%82%E9%94%81%E5%92%8C%E6%82%B2%E8%A7%82%E9%94%81/" class="archive-article-date">
+  	<time datetime="2020-05-13T12:13:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h3><p>每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在提交更新的时候会判断一下在此期间别人有没有去更新这个数据。</p>
+<h3 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h3>
+        
+          <a class="article-more-a" href="/2020/05/13/%E4%B9%90%E8%A7%82%E9%94%81%E5%92%8C%E6%82%B2%E8%A7%82%E9%94%81/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/13/%E4%B9%90%E8%A7%82%E9%94%81%E5%92%8C%E6%82%B2%E8%A7%82%E9%94%81/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-MyBatis-分页插件的实现原理是什么？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/06/MyBatis-%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F/">MyBatis 分页插件的实现原理是什么？</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/06/MyBatis-%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F/" class="archive-article-date">
+  	<time datetime="2020-05-06T02:11:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="MyBatis-分页插件的实现原理是什么？"><a href="#MyBatis-分页插件的实现原理是什么？" class="headerlink" title="MyBatis 分页插件的实现原理是什么？"></a>MyBatis 分页插件的实现原理是什么？</h3><p>分页插件的基本原理是使用 MyBatis 提供的插件接口，实现自定义插件，在插件的拦截方法内拦截待执行的 SQL，然后重写 SQL，根据 dialect 方言，添加对应的物理分页语句和物理分页参数。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/06/MyBatis-%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-RowBounds-是一次性查询全部结果吗" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/20/RowBounds-%E6%98%AF%E4%B8%80%E6%AC%A1%E6%80%A7%E6%9F%A5%E8%AF%A2%E5%85%A8%E9%83%A8%E7%BB%93%E6%9E%9C%E5%90%97/">RowBounds 是一次性查询全部结果吗?</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/20/RowBounds-%E6%98%AF%E4%B8%80%E6%AC%A1%E6%80%A7%E6%9F%A5%E8%AF%A2%E5%85%A8%E9%83%A8%E7%BB%93%E6%9E%9C%E5%90%97/" class="archive-article-date">
+  	<time datetime="2020-04-20T12:05:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="RowBounds"><a href="#RowBounds" class="headerlink" title="RowBounds"></a>RowBounds</h3><p>RowBounds 表面是在“所有”数据中检索数据，其实并非是一次性查询出所有数据，因为 MyBatis 是对 jdbc 的封装，在 jdbc 驱动中有一个 Fetch Size 的配置，它规定了每次最多从数据库查询多少条数据，假如你要查询更多数据，它会在你执行 next()的时候，去查询更多的数据。只是对于 jdbc 来说，当你调用 next()的时候会自动帮你完成查询工作。这样做的好处可以有效的防止内存溢出。</p>
+<p>Fetch Size 官方相关文档：<a href="http://t" target="_blank" rel="noopener">http://t</a>. cn/EfSE2g3</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/20/RowBounds-%E6%98%AF%E4%B8%80%E6%AC%A1%E6%80%A7%E6%9F%A5%E8%AF%A2%E5%85%A8%E9%83%A8%E7%BB%93%E6%9E%9C%E5%90%97/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Mybatis有几种分页方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/07/Mybatis%E6%9C%89%E5%87%A0%E7%A7%8D%E5%88%86%E9%A1%B5%E6%96%B9%E5%BC%8F/">Mybatis有几种分页方式</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/07/Mybatis%E6%9C%89%E5%87%A0%E7%A7%8D%E5%88%86%E9%A1%B5%E6%96%B9%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2020-04-07T12:02:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="分页方式：逻辑分页和物理分页。"><a href="#分页方式：逻辑分页和物理分页。" class="headerlink" title="分页方式：逻辑分页和物理分页。"></a>分页方式：逻辑分页和物理分页。</h2><h3 id="逻辑分页："><a href="#逻辑分页：" class="headerlink" title="逻辑分页："></a>逻辑分页：</h3><p>使用 MyBatis 自带的 RowBounds 进行分页，它是一次性查询很多数据，然后在数据中再进行检索。</p>
+<h3 id="物理分页："><a href="#物理分页：" class="headerlink" title="物理分页："></a>物理分页：</h3><p>自己手写 SQL 分页或使用分页插件 PageHelper，去数据库查询指定条数的分页数据的形式。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/07/Mybatis%E6%9C%89%E5%87%A0%E7%A7%8D%E5%88%86%E9%A1%B5%E6%96%B9%E5%BC%8F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Redis的常见性能问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -606,269 +907,9 @@
 
 
   
-    <article id="post-网络编程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/06/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/06/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2019-07-06T12:35:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h1><h2 id="软件结构"><a href="#软件结构" class="headerlink" title="软件结构"></a>软件结构</h2><h3 id="C-S结构：全称为Client-Server结构，是指客户端和服务器结构。常见程序有QQ、迅雷等软件。"><a href="#C-S结构：全称为Client-Server结构，是指客户端和服务器结构。常见程序有QQ、迅雷等软件。" class="headerlink" title="C/S结构：全称为Client/Server结构，是指客户端和服务器结构。常见程序有ＱＱ、迅雷等软件。"></a>C/S结构：全称为Client/Server结构，是指客户端和服务器结构。常见程序有ＱＱ、迅雷等软件。</h3><h3 id="B-S结构-：全称为Browser-Server结构，是指浏览器和服务器结构。常见浏览器有谷歌、火狐等。"><a href="#B-S结构-：全称为Browser-Server结构，是指浏览器和服务器结构。常见浏览器有谷歌、火狐等。" class="headerlink" title="B/S结构 ：全称为Browser/Server结构，是指浏览器和服务器结构。常见浏览器有谷歌、火狐等。"></a>B/S结构 ：全称为Browser/Server结构，是指浏览器和服务器结构。常见浏览器有谷歌、火狐等。</h3>
-        
-          <a class="article-more-a" href="/2019/07/06/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/06/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-File类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/13/File%E7%B1%BB/">File类</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/13/File%E7%B1%BB/" class="archive-article-date">
-  	<time datetime="2019-06-13T12:47:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="File类"><a href="#File类" class="headerlink" title="File类"></a>File类</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><code>java.io.File</code> 类是文件和目录路径名的抽象表示，主要用于文件和目录的创建、查找和删除等操作。</p>
-        
-          <a class="article-more-a" href="/2019/06/13/File%E7%B1%BB/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/13/File%E7%B1%BB/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-字节流，字符流" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/12/%E5%AD%97%E8%8A%82%E6%B5%81%EF%BC%8C%E5%AD%97%E7%AC%A6%E6%B5%81/">字节流，字符流</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/12/%E5%AD%97%E8%8A%82%E6%B5%81%EF%BC%8C%E5%AD%97%E7%AC%A6%E6%B5%81/" class="archive-article-date">
-  	<time datetime="2019-06-12T09:50:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="IO概述"><a href="#IO概述" class="headerlink" title="IO概述"></a>IO概述</h1><h2 id="什么是IO"><a href="#什么是IO" class="headerlink" title="什么是IO"></a>什么是IO</h2><p>当编辑一个文本文件，忘记了<code>ctrl+s</code> ，可能文件就白白编辑了。当电脑上插入一个U盘，可以把一个视频，拷贝到电脑硬盘里。那么数据都是在哪些设备上的呢？键盘、内存、硬盘、外接设备等等。</p>
-        
-          <a class="article-more-a" href="/2019/06/12/%E5%AD%97%E8%8A%82%E6%B5%81%EF%BC%8C%E5%AD%97%E7%AC%A6%E6%B5%81/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/12/%E5%AD%97%E8%8A%82%E6%B5%81%EF%BC%8C%E5%AD%97%E7%AC%A6%E6%B5%81/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mysql-8.0.15-winx64安装教程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/20/mysql-8.0.15-winx64%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/">mysql安装</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/20/mysql-8.0.15-winx64%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2019-05-20T12:28:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="mysql-8-0-15-winx64安装教程"><a href="#mysql-8-0-15-winx64安装教程" class="headerlink" title="mysql-8.0.15-winx64安装教程"></a>mysql-8.0.15-winx64安装教程</h1><h2 id="1、下载zip安装包：https-dev-mysql-com-downloads-file-id-484900"><a href="#1、下载zip安装包：https-dev-mysql-com-downloads-file-id-484900" class="headerlink" title="1、下载zip安装包：https://dev.mysql.com/downloads/file/?id=484900"></a>1、下载zip安装包：<a href="https://dev.mysql.com/downloads/file/?id=484900" target="_blank" rel="noopener">https://dev.mysql.com/downloads/file/?id=484900</a></h2><h2 id="2、安装"><a href="#2、安装" class="headerlink" title="2、安装"></a>2、安装</h2><p>2.1 解压zip包到安装目录</p>
-        
-          <a class="article-more-a" href="/2019/05/20/mysql-8.0.15-winx64%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/20/mysql-8.0.15-winx64%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
